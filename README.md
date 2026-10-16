@@ -40,23 +40,27 @@ Keep the service role key in `server/.env` only. The variable names are listed a
 
 ## Live site on Vercel
 
-The website and the API deploy together. In the Vercel project settings:
+In the Vercel project, set:
 
-- Root Directory: the repository root, not `web`
+- Root Directory: empty
 - Framework Preset: Other
-- The build settings come from `vercel.json`
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output Directory: `public`
 
-Environment variables, in addition to the two `VITE_` values:
+Environment variables:
 
-- `SUPABASE_URL` — the same project URL
-- `SUPABASE_SERVICE_ROLE_KEY` — the secret key, never the publishable key
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY` — the secret key from `server/.env`
 
-Redeploy after saving those. Evidence files on the live site need to be under 4 MB.
+Redeploy after saving. Evidence files on the live site need to be under 4 MB.
 
 ## Run
 
 ```
-npm install --prefix api
+npm install --prefix server
 npm install --prefix web
 npm run dev
 ```

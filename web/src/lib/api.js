@@ -32,9 +32,17 @@ export async function api(path, options = {}) {
     throw new ApiError("The API is not running. Start it from the api folder.");
   }
 
-  const payload = await response.json().catch(() => ({}));
+  const text = await response.text();
+  let payload = {};
+  if (text) {
+    try {
+      payload = JSON.parse(text);
+    } catch {
+      payload = { error: text.slice(0, 180) };
+    }
+  }
   if (!response.ok) {
-    throw new ApiError(payload.error || "Request failed.", payload.fields);
+    throw new ApiError(payload.error || `Request failed (${response.status}).`, payload.fields);
   }
   return payload;
 }

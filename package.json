@@ -1,8 +1,16 @@
 {
   "name": "aegis",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "node scripts/dev.mjs",
-    "build": "npm run build --prefix web"
+    "build": "npm install --prefix web && npm run build --prefix web"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.8",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "multer": "^2.0.2"
   }
 }
