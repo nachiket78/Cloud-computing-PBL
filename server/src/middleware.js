@@ -3,7 +3,7 @@ import { getServiceClient, isConfigured } from "./supabase.js";
 export function requireConfig(_req, res, next) {
   if (!isConfigured()) {
     return res.status(503).json({
-      error: "Cloud storage is not configured. Add Supabase keys to api/.env.",
+      error: "Cloud storage is not configured. Add the Supabase URL and secret key.",
     });
   }
   next();

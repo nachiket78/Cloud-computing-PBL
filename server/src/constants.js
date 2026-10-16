@@ -10,5 +10,5 @@ export const ALLOWED_MIME_TYPES = new Set([
   "application/pdf",
 ]);
 
-export const MAX_FILE_BYTES = 10 * 1024 * 1024;
+export const MAX_FILE_BYTES = 4 * 1024 * 1024;
 export const SIGNED_URL_SECONDS = 300;

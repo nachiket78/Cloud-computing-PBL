@@ -41,7 +41,7 @@ export function validateEvidenceFile(file) {
     return "Upload a JPG, PNG, WebP, or PDF.";
   }
   if (file.size > MAX_FILE_BYTES) {
-    return "Files must be 10 MB or smaller.";
+    return "Files must be 4 MB or smaller.";
   }
   return "";
 }

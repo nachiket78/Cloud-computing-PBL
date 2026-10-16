@@ -19,7 +19,7 @@ The React app talks to Supabase Auth for sign-in, then sends the access token to
 2. In Authentication → Providers → Email, turn off **Confirm email** so a demo account can sign in immediately.
 3. Open the SQL editor and run [supabase/schema.sql](supabase/schema.sql). That creates `profiles`, `incidents`, `audit_log`, the signup trigger, row policies, and the private `evidence` bucket.
 4. In Project Settings → API, copy the project URL, the anon key, and the service role key.
-5. Create `api/.env`:
+5. Create `server/.env`:
 
 ```
 PORT=4000
@@ -36,7 +36,22 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 VITE_API_URL=
 ```
 
-Keep the service role key in `api/.env` only. The variable names are listed again in [.env.example](.env.example).
+Keep the service role key in `server/.env` only. The variable names are listed again in [.env.example](.env.example).
+
+## Live site on Vercel
+
+The website and the API deploy together. In the Vercel project settings:
+
+- Root Directory: the repository root, not `web`
+- Framework Preset: Other
+- The build settings come from `vercel.json`
+
+Environment variables, in addition to the two `VITE_` values:
+
+- `SUPABASE_URL` — the same project URL
+- `SUPABASE_SERVICE_ROLE_KEY` — the secret key, never the publishable key
+
+Redeploy after saving those. Evidence files on the live site need to be under 4 MB.
 
 ## Run
 

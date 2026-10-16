@@ -31,7 +31,7 @@ export function NewIncident() {
     if (!SEVERITIES.includes(form.severity)) next.severity = "Choose a severity.";
     if (form.description.trim().length < 10) next.description = "Describe the incident in at least 10 characters.";
     if (!file) next.file = "Attach a photo or PDF.";
-    else if (file.size > 10 * 1024 * 1024) next.file = "Files must be 10 MB or smaller.";
+    else if (file.size > 4 * 1024 * 1024) next.file = "Files must be 4 MB or smaller.";
     else if (!["image/jpeg", "image/png", "image/webp", "image/jpg", "application/pdf"].includes(file.type)) {
       next.file = "Upload a JPG, PNG, WebP, or PDF.";
     }
@@ -87,7 +87,7 @@ export function NewIncident() {
           <Field id="description" label="What happened" error={errors.description}>
             <textarea {...inputProps("description", errors.description)} className="textarea" maxLength={4000} value={form.description} onChange={(event) => update("description", event.target.value)} />
           </Field>
-          <Field id="file" label="Evidence" error={errors.file} hint="JPG, PNG, WebP, or PDF. 10 MB maximum.">
+          <Field id="file" label="Evidence" error={errors.file} hint="JPG, PNG, WebP, or PDF. 4 MB maximum.">
             <label className="file-drop">
               <input
                 id="file"

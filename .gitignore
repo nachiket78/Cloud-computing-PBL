@@ -2,7 +2,7 @@ node_modules/
 dist/
 .env
 .env.local
-api/.env
+server/.env
 web/.env
 web/.env.local
 *.log

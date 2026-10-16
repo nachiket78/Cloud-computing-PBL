@@ -139,7 +139,7 @@ api.post("/incidents", requireUser, (req, res, next) => {
     if (uploadError) {
       const tooLarge = uploadError.code === "LIMIT_FILE_SIZE";
       return res.status(400).json({
-        error: tooLarge ? "Files must be 10 MB or smaller." : "Could not read the uploaded file.",
+        error: tooLarge ? "Files must be 4 MB or smaller." : "Could not read the uploaded file.",
       });
     }
     createIncident(req, res).catch(next);
