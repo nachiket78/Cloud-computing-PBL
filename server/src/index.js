@@ -46,7 +46,7 @@ app.use((error, _req, res, _next) => {
 
 if (!process.env.VERCEL) {
   app.listen(port, () => {
-    console.log(`Aegis API listening on http://localhost:${port}`);
+    console.log(`Lumen API listening on http://localhost:${port}`);
   });
 }
 

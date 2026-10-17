@@ -47,7 +47,7 @@ export function useTheme() {
   function toggleTheme() {
     const next = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
-    localStorage.setItem("aegis-theme", next);
+    localStorage.setItem("lumen-theme", next);
     setTheme(next);
   }
 

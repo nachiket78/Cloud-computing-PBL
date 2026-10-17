@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { Files, LayoutDashboard, LogOut, Menu, Moon, Plus, ScrollText, Shield, Sun, X } from "lucide-react";
+import { Files, LayoutDashboard, LogOut, Menu, Moon, Plus, ScrollText, Sun, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { initials } from "../lib/format.js";
 import { label } from "../lib/constants.js";
@@ -30,8 +30,8 @@ export function AppShell() {
       {open ? <button type="button" className="scrim" aria-label="Close menu" onClick={() => setOpen(false)} /> : null}
       <aside className={`sidebar${open ? " open" : ""}`}>
         <div className="brand">
-          <span className="mark" aria-hidden="true"><Shield size={16} /></span>
-          <strong>Aegis</strong>
+          <span className="mark" aria-hidden="true"><span className="mark-core" /></span>
+          <strong>Lumen</strong>
           <button type="button" className="icon-button sidebar-close" aria-label="Close menu" onClick={() => setOpen(false)}>
             <X size={16} aria-hidden="true" />
           </button>

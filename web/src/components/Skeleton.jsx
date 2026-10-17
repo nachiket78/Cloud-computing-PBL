@@ -23,7 +23,7 @@ export function BootScreen() {
   return (
     <div className="boot">
       <div className="boot-card" aria-busy="true" aria-live="polite">
-        <span className="sr-only">Loading Aegis</span>
+        <span className="sr-only">Loading Lumen</span>
         <Skeleton className="line-skeleton" />
         <Skeleton className="line-skeleton" />
         <Skeleton className="line-skeleton" />

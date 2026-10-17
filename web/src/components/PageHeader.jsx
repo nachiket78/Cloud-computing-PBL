@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export function PageHeader({ title, description, action }) {
   useEffect(() => {
-    document.title = title ? `${title} · Aegis` : "Aegis";
+    document.title = title ? `${title} · Lumen` : "Lumen";
   }, [title]);
 
   return (

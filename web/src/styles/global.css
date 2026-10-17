@@ -95,6 +95,7 @@ img {
 }
 
 .mark {
+  position: relative;
   width: 28px;
   height: 28px;
   display: grid;
@@ -103,6 +104,14 @@ img {
   background: var(--accent-button);
   color: var(--accent-contrast);
   flex: none;
+}
+
+.mark-core {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.28);
 }
 
 .brand strong {
@@ -870,20 +879,108 @@ tbody tr.is-clickable:hover {
 }
 
 .auth-screen {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   display: flex;
   align-items: safe center;
   justify-content: center;
   padding: 72px 16px 32px;
+  overflow: hidden;
+}
+
+.auth-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(18px);
+  animation: drift 16s ease-in-out infinite;
+}
+
+.glow-a {
+  width: 320px;
+  height: 320px;
+  top: 8%;
+  left: 12%;
+  background: #1f4fd8;
+  opacity: 0.16;
+}
+
+.glow-b {
+  width: 260px;
+  height: 260px;
+  right: 8%;
+  bottom: 10%;
+  background: #7aa2ff;
+  opacity: 0.22;
+  animation-delay: -6s;
+}
+
+.glow-c {
+  width: 160px;
+  height: 160px;
+  top: 58%;
+  left: 46%;
+  background: #9db6f8;
+  opacity: 0.28;
+  animation-delay: -11s;
+}
+
+:root[data-theme="dark"] .glow-a {
+  opacity: 0.34;
+}
+
+:root[data-theme="dark"] .glow-b,
+:root[data-theme="dark"] .glow-c {
+  opacity: 0.24;
 }
 
 .auth-card {
+  position: relative;
+  z-index: 1;
   width: min(400px, 100%);
   padding: var(--space-8) var(--space-6);
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
+  box-shadow: 0 24px 60px rgba(16, 17, 20, 0.08);
+  animation: card-in 700ms var(--ease) both;
+}
+
+.auth-card .brand,
+.auth-card h1,
+.auth-card .lede,
+.auth-card .setup-note,
+.auth-card .field,
+.auth-card .form-actions,
+.auth-card .auth-footer {
+  animation: rise 620ms var(--ease) both;
+}
+
+.auth-card h1 { animation-delay: 80ms; }
+.auth-card .lede { animation-delay: 140ms; }
+.auth-card .setup-note { animation-delay: 180ms; }
+.auth-card .field:nth-of-type(1) { animation-delay: 200ms; }
+.auth-card .field:nth-of-type(2) { animation-delay: 260ms; }
+.auth-card .field:nth-of-type(3) { animation-delay: 320ms; }
+.auth-card .field:nth-of-type(4) { animation-delay: 380ms; }
+.auth-card .form-actions { animation-delay: 440ms; }
+.auth-card .auth-footer { animation-delay: 500ms; }
+
+.mark-live::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent-button) 55%, transparent);
+  animation: pulse 2.8s ease-out infinite;
 }
 
 .auth-card h1 {
@@ -925,6 +1022,7 @@ tbody tr.is-clickable:hover {
   position: fixed;
   top: 16px;
   right: 16px;
+  z-index: 2;
 }
 
 .boot {
@@ -959,12 +1057,34 @@ tbody tr.is-clickable:hover {
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
     transform: none;
   }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(28px, -32px, 0) scale(1.08); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.84); opacity: 0.7; }
+  100% { transform: scale(1.28); opacity: 0; }
 }
 
 @keyframes fade {

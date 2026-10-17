@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aegis</title>
+    <title>Lumen</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script>
       (function () {
-        var stored = localStorage.getItem("aegis-theme");
+        var stored = localStorage.getItem("lumen-theme") || localStorage.getItem("aegis-theme");
         var theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
         document.documentElement.dataset.theme = theme;
       })();

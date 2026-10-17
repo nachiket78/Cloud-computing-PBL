@@ -1,12 +1,12 @@
-# Aegis
+# Lumen
 
-Aegis is a campus incident desk. Reporters file a case with a photo or PDF. Reviewers move it from Open to Investigating to Resolved and leave a note. Accounts, case records, and the audit log live in Supabase. Evidence files live in a private Storage bucket. The browser never reads that bucket directly.
+Lumen is a campus incident desk. Reporters file a case with a photo or PDF. Reviewers move it from Open to Investigating to Resolved and leave a note. Accounts, case records, and the audit log live in Supabase. Evidence files live in a private Storage bucket. The browser never reads that bucket directly.
 
 ## Architecture
 
 The React app talks to Supabase Auth for sign-in, then sends the access token to the Express API. The API checks the token and the role, hashes the file, uploads the bytes, and writes the row.
 
-| Aegis piece | Supabase | Syllabus name |
+| Lumen piece | Supabase | Syllabus name |
 | --- | --- | --- |
 | Evidence bucket | Storage, private | Amazon S3 |
 | Cases, profiles, audit log | Postgres | Amazon RDS |
