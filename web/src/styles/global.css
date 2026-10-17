@@ -885,8 +885,132 @@ tbody tr.is-clickable:hover {
   display: flex;
   align-items: safe center;
   justify-content: center;
-  padding: 72px 16px 32px;
-  overflow: hidden;
+  padding: 80px 28px 40px;
+  overflow-x: hidden;
+}
+
+.auth-layout {
+  position: relative;
+  z-index: 1;
+  width: min(1040px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 400px);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+  padding: 40px 36px 40px 48px;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--surface) 64%, transparent);
+  box-shadow: 0 24px 70px rgba(16, 17, 20, 0.05);
+}
+
+.auth-story {
+  min-width: 0;
+  max-width: 460px;
+}
+
+.auth-eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 550;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  animation: rise 680ms var(--ease) 40ms both;
+}
+
+.auth-headline {
+  margin-top: 12px;
+  font-size: clamp(34px, 4vw, 46px);
+  line-height: 1.08;
+  font-weight: 560;
+  letter-spacing: -0.035em;
+  animation: rise 680ms var(--ease) 120ms both;
+}
+
+.auth-rule {
+  display: block;
+  width: 88px;
+  height: 2px;
+  margin-top: 22px;
+  border-radius: 99px;
+  background-image: linear-gradient(
+    90deg,
+    var(--accent-button) 0%,
+    var(--accent-button) 35%,
+    color-mix(in srgb, var(--accent-button) 45%, white) 50%,
+    var(--accent-button) 65%,
+    var(--accent-button) 100%
+  );
+  background-size: 220% 100%;
+  transform-origin: left center;
+  animation:
+    auth-draw 900ms var(--ease) 280ms both,
+    auth-sheen 7s ease-in-out 1.2s infinite;
+}
+
+.auth-points {
+  position: relative;
+  margin-top: 26px;
+}
+
+.auth-points ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-point {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: center;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.45;
+  animation: rise 680ms var(--ease) both;
+}
+
+.auth-point:nth-child(1) { animation-delay: 300ms; }
+.auth-point:nth-child(2) { animation-delay: 430ms; }
+.auth-point:nth-child(3) { animation-delay: 560ms; }
+
+.auth-point-mark {
+  width: 8px;
+  height: 8px;
+  justify-self: center;
+  border-radius: 50%;
+  background: var(--accent-button);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-button) 18%, transparent);
+  animation: auth-mark-in 560ms var(--ease) both;
+}
+
+.auth-point:nth-child(1) .auth-point-mark { animation-delay: 340ms; }
+.auth-point:nth-child(2) .auth-point-mark { animation-delay: 470ms; }
+.auth-point:nth-child(3) .auth-point-mark { animation-delay: 600ms; }
+
+.auth-rail {
+  position: absolute;
+  left: 7px;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: color-mix(in srgb, var(--accent-button) 42%, var(--border));
+}
+
+.auth-traveler {
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-button);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--surface) 80%, transparent);
+  transform: translateY(-50%);
+  animation: auth-travel 9s ease-in-out infinite;
 }
 
 .auth-glow {
@@ -946,12 +1070,22 @@ tbody tr.is-clickable:hover {
   position: relative;
   z-index: 1;
   width: min(400px, 100%);
+  justify-self: end;
   padding: var(--space-8) var(--space-6);
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: 0 24px 60px rgba(16, 17, 20, 0.08);
   animation: card-in 700ms var(--ease) both;
+}
+
+:root[data-theme="dark"] .auth-layout {
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+}
+
+:root[data-theme="dark"] .auth-card {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
 }
 
 .auth-card .brand,
@@ -1092,6 +1226,38 @@ tbody tr.is-clickable:hover {
   to { opacity: 1; }
 }
 
+@keyframes auth-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes auth-sheen {
+  0%,
+  100% { background-position: 0% 0; }
+  50% { background-position: 100% 0; }
+}
+
+@keyframes auth-mark-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes auth-travel {
+  0%,
+  16% { top: 0; }
+  40%,
+  56% { top: 50%; }
+  80%,
+  94% { top: 100%; }
+  100% { top: 0; }
+}
+
 @keyframes shimmer {
   to { transform: translateX(100%); }
 }
@@ -1186,6 +1352,57 @@ tbody tr.is-clickable:hover {
 
   .auth-card {
     padding: var(--space-6) var(--space-4);
+  }
+
+  .auth-headline {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .auth-screen {
+    align-items: flex-start;
+    padding: 72px 16px 32px;
+  }
+
+  .auth-layout {
+    width: min(400px, 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .auth-story {
+    max-width: none;
+    padding-right: 36px;
+  }
+
+  .auth-headline {
+    font-size: 26px;
+  }
+
+  .auth-rule {
+    margin-top: 14px;
+  }
+
+  .auth-points {
+    display: none;
+  }
+
+  .auth-card {
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-headline {
+    font-size: 22px;
   }
 }
 
