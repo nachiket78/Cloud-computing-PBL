@@ -13,14 +13,16 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (!supabase) return undefined;
     let active = true;
-    supabase.auth.getSession().then(({ data }) => {
-      if (active) setSession(data.session ?? null);
-    });
     const { data } = supabase.auth.onAuthStateChange((_event, next) => {
-      setSession(next);
+      if (active) setSession(next);
     });
+    const timeout = window.setTimeout(() => {
+      if (!active) return;
+      setSession((current) => (current === undefined ? null : current));
+    }, 8000);
     return () => {
       active = false;
+      window.clearTimeout(timeout);
       data.subscription.unsubscribe();
     };
   }, []);

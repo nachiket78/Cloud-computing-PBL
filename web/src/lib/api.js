@@ -38,7 +38,7 @@ export async function api(path, options = {}) {
     try {
       payload = JSON.parse(text);
     } catch {
-      payload = { error: text.slice(0, 180) };
+      payload = { error: text.trim().startsWith("<") ? "The API is not available on this site." : text.slice(0, 180) };
     }
   }
   if (!response.ok) {
